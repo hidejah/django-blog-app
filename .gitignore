@@ -6,3 +6,6 @@ media
 # files
 db.sqlite3
 .env
+.python-version
+pyproject.toml
+uv.lock
