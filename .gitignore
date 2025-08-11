@@ -9,3 +9,4 @@ db.sqlite3
 .python-version
 pyproject.toml
 uv.lock
+.DS_Store
