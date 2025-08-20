@@ -15,7 +15,12 @@
                     <small class="ps-1">
                         <i class="fa-solid fa-pencil"></i>{{ post.created_at|date }} |
                         <i class="fa-solid fa-wrench"></i>{{ post.updated_at|date }}
-
+                        {% if user.is_authenticated %}
+                        <a class="edit-post" href="{% url 'post-edit' post.pk %}">
+                            <i class="fa-solid fa-pen-to-square"></i>
+                            編集する
+                        </a>
+                        {% endif %}
                     </small>
                 </p>
                 {% if post.image %}

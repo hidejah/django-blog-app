@@ -1,15 +1,45 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import ListView, DetailView, CreateView, DeleteView
+from django.views.generic import (
+    ListView,
+    DetailView,
+    CreateView,
+    DeleteView,
+    UpdateView,
+)
 from django.http import Http404
 from django.urls import reverse_lazy, reverse
 
 from blog.models import Post, Category, Tag, Comment, Reply
-from blog.forms import CommentForm, ReplyForm
+from blog.forms import PostForm, CommentForm, ReplyForm
 
 
 posts_per_page = 5
+
+
+class PostCreateView(CreateView):
+    model = Post
+    form_class = PostForm
+    template_name = "blog/post_new.html"
+
+
+class PostUpdateView(UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = "blog/post_edit.html"
+
+    def get_object(self, queryset=None):
+        post = super().get_object(queryset)
+
+        # 公開 or ログイン
+        if post.is_published or self.request.user.is_authenticated:
+            return post
+        else:
+            raise Http404
+
+    def get_success_url(self):
+        return reverse("post-detail", kwargs={"pk": self.object.pk})
 
 
 class PostListView(ListView):

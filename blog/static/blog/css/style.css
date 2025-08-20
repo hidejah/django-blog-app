@@ -1,4 +1,4 @@
-div.category > ul > li a {
+div.category>ul>li a {
     color: #212529;
     text-decoration: none;
 }
@@ -7,7 +7,14 @@ img {
     object-fit: cover;
 }
 
-.new-comment, .comment a {
+.new-comment,
+.edit-post,
+.comment a {
+    color: #212529;
+    text-decoration: none;
+}
+
+.stretched-link {
     color: #212529;
     text-decoration: none;
 }

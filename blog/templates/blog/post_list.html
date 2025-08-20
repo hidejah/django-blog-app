@@ -33,7 +33,7 @@
                     <h3 class="mb-0">{{ post.title }}</h3>
                     <div class="mb-2 text-body-secondary">{{ post.updated_at|date }}</div>
                     <p class="card-text mb-auto">{{ post.convert_markdown_to_html|striptags|truncatechars:30 }}</p>
-                    <a href="{% url 'post-detail' post.pk %}" class="tretched-link">続きを読む＞＞</a>
+                    <a href="{% url 'post-detail' post.pk %}" class="stretched-link">続きを読む＞＞</a>
                     </div>
                     <div class="col-auto d-none d-lg-block">
                         {% if post.image %}

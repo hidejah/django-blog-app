@@ -1,12 +1,31 @@
-<nav class="navbar navbar-expand-lg navbar-light shadow-sm p-3 mb-5 bg-body rounded">
+<nav class="navbar navbar-expand-lg navbar-light shadow-sm bg-body rounded" aria-label="Offcanvas navbar large">
     <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'post-list' %}">Djangoブログ</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <form action="{% url 'search-post-list' %}" method="GET" class="d-flex">
-        <input class="form-control me-2" type="text" name="query" placeholder="キーワードを入力" value="{{ query }}">
-        <input class="btn btn-outline-success" type="submit" value="検索">
-    </form>
+        <a class="navbar-brand" href="{% url 'post-list' %}">Djangoブログ</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'post-new' %}">記事の作成</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">ログアウト</a>
+                </li>
+                {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">ログイン</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'signup' %}">会員登録</a>
+                </li>
+                {% endif %}
+            </ul>
+            <form action="{% url 'search-post-list' %}" method="GET" class="d-flex mt-3 mt-lg-0" role="search">
+                <input class="form-control me-2" type="text" name="query" placeholder="キーワードを入力" aria-label="Search" value="{{ query }}">
+                <input class="btn btn-outline-success" type="submit" value="検索">
+            </form>
+        </div>
     </div>
 </nav>
